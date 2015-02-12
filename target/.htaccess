@@ -1,0 +1,7 @@
+AddType application/x-httpd-php .php
+
+RewriteEngine on
+Options +FollowSymlinks
+
+RewriteCond %{REQUEST_URI} ^/home$
+RewriteRule ^.*$ $0.php [L]
