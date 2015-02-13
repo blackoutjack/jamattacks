@@ -1,20 +1,21 @@
 <?php
 include('../declare.php');
+
+$title = "Attack pattern prototype: DOM-based XSS";
+include('../inc/header.php');
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Attack pattern prototypes: DOM-based XSS</title>
-</head>
-<body>
-<h1>Private session information</h1>
-<p id="session">Session id: <?=session_id()?></p>
+<h1>DOM-based XSS target page</h1>
+<h3>Private session information</h3>
+<p class="instructions" id="session">Session id: <?=session_id()?></p>
+<p class="instructions">
 <script type="text/javascript">
 var name = window.name;
 document.write("window.name: " + name);
 </script>
-<a href="<?=TGTHOST?>dombased/start">dom-based XSS start</a> |
-<a href="<?=TGTHOST?>home">home</a>
-</body>
-</html>
+</p>
+<?
+$links = array(
+  'dom-based XSS start' => TGTHOST."dombased/start",
+);
+include('../inc/footer.php');
+?>

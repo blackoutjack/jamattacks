@@ -2,18 +2,18 @@
 include('../declare.php');
 
 $value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
+
+$title = "Attack pattern prototype: Reflected XSS";
+include('../inc/header.php');
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Attack pattern prototypes: Reflected XSS</title>
-</head>
-<body>
-<h1>Private session information</h1>
-<p id="session">Session id: <?=session_id()?></p>
-<p id="value">Received value: <?=$value?></p>
-<a href="<?=TGTHOST?>reflected/start">reflected XSS start</a> |
-<a href="<?=TGTHOST?>home">home</a>
-</body>
-</html>
+<h1>Reflected XSS target page</h1>
+<h3>Private session information</h3>
+<p class="instructions" id="session">Session id: <?=session_id()?></p>
+<p class="instructions" id="value">Received value: <?=$value?></p>
+<?
+$links = array(
+  'reflected XSS start' => TGTHOST."reflected/start",
+  'view' => TGTHOST."stored/view",
+);
+include('../inc/footer.php');
+?>

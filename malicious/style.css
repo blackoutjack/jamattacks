@@ -1,0 +1,84 @@
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#outer {
+  background-color: #eeb9b9;
+  padding: 12%;
+  margin: 8pt;
+}
+
+h1 {
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+h2 {
+  margin: 4px 0 6px 0;
+  text-align: center;
+}
+
+h3 {
+  width: 100%;
+  margin: 0 auto 0 auto;
+  font-weight: bold;
+  font-size: 14pt;
+}
+
+#links {
+  text-align: center;
+}
+
+p {
+  font-size: 13pt;
+}
+
+.login {
+  width: 100%;
+  text-align: right;
+  float: right;
+}
+
+.instructions {
+  width: 100%;
+  margin: 0 auto 12px auto;
+}
+
+ul {
+  width: 100%;
+  margin: 4pt auto 4pt auto;
+}
+
+form {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.field {
+  width: 40%;
+  margin: 0 0 10px auto;
+}
+
+.label {
+  width: 37%;
+  float: left;
+  margin: 0 6pt 0 0;
+  text-align: right;
+}
+
+.btn {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#error {
+  color: #880000;
+  text-align: center;
+}
+
+.quiet {
+  font-size: 7pt;
+}

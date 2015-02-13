@@ -1,12 +1,10 @@
 <?php
 include('../declare.php');
 
+$title = "Malicious server prototype: Resource scanner";
+
+ob_start();
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Malicious server prototype: Resource scanning</title>
 <script type="text/javascript">
 function gotFile(ev, ok, file) {
   var elt = document.getElementById('results');
@@ -31,9 +29,19 @@ function fileLoad(ev) {
   results.textContent += 'Found file ' + file + '\n';
 }
 </script>
-</head>
-<body>
+<?
+$header = ob_get_clean();
+
+include('../inc/header.php');
+?>
 <h1>Resource scanner</h1>
+<p class="instructions">
+This page includes img and script tags that link to the target server.
+The files are intended to be private, so that only a logged-in user
+should be able to access them. However, this page is able to exploit the
+logged-in status of the user (if that is the case) to determine whether
+the files exist or not.
+</p>
 <div id='scans'>
 </div>
 <!--
@@ -43,10 +51,6 @@ function fileLoad(ev) {
 -->
 <br/>
 <pre id="results"></pre>
-<br/>
-<br/>
-<a href="<?=TGTHOST?>scanning/start">scanning start</a> |
-<a href="<?=TGTHOST?>home">target server home</a>
 <script type="text/javascript">
 var files = ['secret.png', 'notexist.png', 'passwords.txt'];
 var elt = document.getElementById('scans');
@@ -65,8 +69,10 @@ for (var i in files) {
   child.src = "<?=TGTHOST?>private/" + file;
   elt.appendChild(child);
 }
-document
 </script>
-</body>
-</html>
-
+<?
+$links = array(
+  'scanning start' => TGTHOST."scanning/start",
+);
+include('../inc/footer.php');
+?>

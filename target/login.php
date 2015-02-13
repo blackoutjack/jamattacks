@@ -52,13 +52,10 @@ if (isset($_REQUEST['logout'])) {
 
 $action = TGTHOST."login";
 
+$title = "Target website login";
+include('inc/header.php');
 ?>
-<html>
-<head>
-<title>Target Website Login</title>
-<link rel="stylesheet" href="style.css"></link>
-</head>
-<body>
+<h1>Target server login</h1>
 <p id="error">
 <?=implode('<br/>', $errors)?>
 </p>
@@ -66,17 +63,21 @@ $action = TGTHOST."login";
 if ($loggedin) {
 ?>
 <form name="logout" method="post" action="<?=$action?>">
-<input name="logout" type="submit" value="Log Out"></input>
+<input class="btn" name="logout" type="submit" value="Log Out"></input>
 </form>
 <?
 } else {
 ?>
 <form name="login" method="post" action="<?=$action?>">
+<div class="label">
 <label for="username">Username:</label>
-<input id="username" name="username" type="text"></input>
+</div>
+<input class="field" id="username" name="username" type="text"></input>
 <br/>
+<div class="label">
 <label for="password">Password:</label>
-<input id="password" name="password" type="password"></input>
+</div>
+<input class="field" id="password" name="password" type="password"></input>
 <br/>
 <?
 if (isset($_REQUEST['referer'])) {
@@ -85,17 +86,14 @@ if (isset($_REQUEST['referer'])) {
 <?
 }
 ?>
-<input name="login" type="submit" value="Log In"></input>
+<input class="btn" name="login" type="submit" value="Log in"></input>
 <br/>
 </form>
 <?
 }
+$links = array();
 if (isset($_REQUEST['referer'])) {
-?>
-<a href="<?=htmlentities($_REQUEST['referer'])?>">back</a> |
-<?
+  $links['back'] = htmlentities($_REQUEST['referer']);
 }
+include('inc/footer.php');
 ?>
-<a href="<?=TGTHOST?>home">target server home</a>
-</body>
-</html>

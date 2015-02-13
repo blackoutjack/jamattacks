@@ -1,0 +1,4 @@
+
+function attack() {
+  alert("gotcha");
+}

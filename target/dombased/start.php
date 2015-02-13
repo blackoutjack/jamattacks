@@ -1,22 +1,20 @@
 <?php
 include('../declare.php');
+
+$title = "Attack pattern prototype: DOM-based XSS";
+include('../inc/header.php');
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Attack pattern prototype: DOM-based XSS</title>
-</head>
-<body>
 <h1>DOM-based XSS</h1>
-<p>
+<p class="instructions">
 By clicking on the ``attack'' link below, you will be taken to a
 malicious website that embeds a different page on this site to conduct
 a DOM-based XSS attack. The ``clean'' link will display the same page
 without the embedding attack.
 </p>
-<a href="<?=MALHOST?>dombased/embed">attack</a> |
-<a href="<?=TGTHOST?>dombased/target">clean</a> |
-<a href="<?=TGTHOST?>home">home</a>
-</body>
-</html>
+<?
+$links = array(
+  'attack' => MALHOST."dombased/embed",
+  'clean' => TGTHOST."dombased/target",
+);
+include('../inc/footer.php');
+?>

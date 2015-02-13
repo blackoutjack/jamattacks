@@ -3,7 +3,7 @@ include('declare.php');
 
 $loggedin = false;
 if (!isset($_SESSION['user'])) {
-  header('Location: /home');
+  header("HTTP/1.0 404 Not Found");
   exit;
 }
 $privpath = realpath('prv');

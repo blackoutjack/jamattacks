@@ -7,16 +7,16 @@ if ($value) {
   $sessiondb = mysql_real_escape_string(session_id());
   mysql_query("INSERT INTO stored (session, value) VALUES ('$sessiondb', '$valuedb');");
 }
+
+$title = "Attack pattern prototypes: Stored XSS";
+include('../inc/header.php');
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Attack pattern prototypes: Stored XSS</title>
-</head>
-<body>
-<h1>Private session information</h1>
-<p id="session">Session id: <?=session_id()?></p>
+<h1>Stored XSS target page</h1>
+<h3>Private session information</h3>
+<p class="instructions" id="session">
+Session id: <?=session_id()?>
+</p>
+<p class="instructions">
 <?
 if ($value) {
 ?>
@@ -28,11 +28,11 @@ if ($value) {
 <?
 }
 ?>
-<br/>
 You can go here to view previously submitted values: <a href="<?=TGTHOST?>/stored/view">view</a>
-<br/>
-<br/>
-<a href="<?=TGTHOST?>stored/start">stored XSS start</a> |
-<a href="<?=TGTHOST?>home">home</a>
-</body>
-</html>
+</p>
+<?
+$links = array(
+  'stored XSS start' => TGTHOST."stored/start",
+);
+include('../inc/footer.php');
+?>
