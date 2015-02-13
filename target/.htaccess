@@ -3,5 +3,9 @@ AddType application/x-httpd-php .php
 RewriteEngine on
 Options +FollowSymlinks
 
-RewriteCond %{REQUEST_URI} ^/home$
+RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^.*$ $0.php [L]
+
+RewriteCond %{REQUEST_URI} private/.*
+RewriteRule ^/?private/(.*)$ loadprivate.php?resource=$1 [L]
+
