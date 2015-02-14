@@ -11,4 +11,5 @@ if ($hostname == 'policy-weaving.cs.wisc.edu') {
   define('TGTHOST', 'http://target/');
 }
 
+define('INCDIR', $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'inc'.DIRECTORY_SEPARATOR);
 ?>

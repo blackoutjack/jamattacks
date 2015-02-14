@@ -6,7 +6,7 @@
 if (isset($links) && is_array($links)) {
   foreach ($links as $linktext => $linkurl) {
 ?>
-<a href="<?=$linkurl?>"><?=$linktext?></a> |
+<a href="<?=htmlspecialchars($linkurl)?>"><?=htmlspecialchars($linktext)?></a> |
 <?
   }
 }
