@@ -9,7 +9,7 @@ if ($hostname === 'blackoutjack.com' || $hostname === 'www.blackoutjack.com') {
   define('MALROOT', MALHOST.'malicious/');
   define('TGTROOT', TGTHOST.'target/');
   // Use HostMonster's SSL certificate when necessary.
-  define('MALALTROOT', 'https://host167.hostmonster.com/~blackou1/');
+  define('MALALTROOT', 'https://host167.hostmonster.com/~blackou1/malicious/');
 
   define('INCDIR', implode(DIRECTORY_SEPARATOR, array($_SERVER['DOCUMENT_ROOT'], 'malicious', 'inc', '')));
 } else {
