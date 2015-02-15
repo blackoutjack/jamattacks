@@ -39,7 +39,7 @@ $action = MALHOST.$requesturi;
 </form>
 <?
 $links = array(
-  'phishing start' => TGTHOST."phishing/start",
+  'phishing start' => TGTROOT."phishing/start",
 );
 include('../inc/footer.php');
 ?>

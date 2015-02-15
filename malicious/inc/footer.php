@@ -11,7 +11,7 @@ if (isset($links) && is_array($links)) {
   }
 }
 ?>
-<a href="<?=TGTHOST?>home">target server home</a>
+<a href="<?=TGTROOT?>home">target server home</a>
 </div><!-- /links -->
 </div><!-- /outer -->
 </body>

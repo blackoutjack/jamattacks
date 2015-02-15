@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title><?=isset($title) ? $title : $_SERVER['REQUEST_URI']?></title>
-<link rel="stylesheet" href="<?=TGTHOST?>style.css"></link>
+<link rel="stylesheet" href="<?=TGTROOT?>style.css"></link>
 <?=isset($header) ? $header : ''?>
 </head>
 <body>

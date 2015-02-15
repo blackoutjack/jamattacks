@@ -4,8 +4,12 @@ session_start();
 
 $hostname = $_SERVER['HTTP_HOST'];
 if ($hostname === 'policy-weaving.cs.wisc.edu') {
-  define('MALHOST', 'http://blackoutjack.com/malicious/');
-  define('TGTHOST', 'https://policy-weaving.cs.wisc.edu/target/');
+  define('MALHOST', 'http://blackoutjack.com/');
+  define('TGTHOST', 'https://policy-weaving.cs.wisc.edu/');
+  define('MALROOT', MALHOST.'malicious/');
+  define('TGTROOT', TGTHOST.'target/');
+  // Use HostMonster's SSL certificate when necessary.
+  define('MALALTROOT', 'https://host167.hostmonster.com/~blackou1/');
   if (mysql_connect("mysql.cs.wisc.edu", "policy_weaver", "crash")) {
     mysql_select_db("policy_weaving");
   }
@@ -14,6 +18,9 @@ if ($hostname === 'policy-weaving.cs.wisc.edu') {
 } else {
   define('MALHOST', 'http://malicious/');
   define('TGTHOST', 'http://target/');
+  define('MALROOT', MALHOST);
+  define('TGTROOT', TGTHOST);
+  define('MALALTROOT', MALROOT);
   if (mysql_connect("localhost", "storer", "crash")) {
     mysql_select_db("target");
   }

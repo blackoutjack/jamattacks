@@ -12,8 +12,8 @@ XSS attack. The ``real'' link displays the true submission form.
 </p>
 <?
 $links = array(
-  'attack' => MALHOST."phishing/phish",
-  'real' => TGTHOST."phishing/target",
+  'attack' => MALROOT."phishing/phish",
+  'real' => TGTROOT."phishing/target",
 );
 include('../inc/footer.php');
 ?>

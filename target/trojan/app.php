@@ -56,11 +56,11 @@ Simple Colorpicker
 </div><!-- End demo -->
 <!-- colorpicker end -->
 
-<script type="text/javascript" src="<?=TGTHOST."trojan/legit.js"?>"></script>
-<script type="text/javascript" src="<?=MALHOST."trojan/trojan.js"?>"></script>
+<script type="text/javascript" src="<?=TGTROOT."trojan/legit.js"?>"></script>
+<script type="text/javascript" src="<?=MALALTROOT."trojan/trojan.js"?>"></script>
 <?
 $links = array(
-  'trojan start' => TGTHOST."trojan/start",
+  'trojan start' => TGTROOT."trojan/start",
 );
 include('../inc/footer.php');
 ?>

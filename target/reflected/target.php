@@ -12,8 +12,8 @@ include('../inc/header.php');
 <p class="instructions" id="value">Received value: <?=$value?></p>
 <?
 $links = array(
-  'reflected XSS start' => TGTHOST."reflected/start",
-  'view' => TGTHOST."stored/view",
+  'reflected XSS start' => TGTROOT."reflected/start",
+  'view' => TGTROOT."stored/view",
 );
 include('../inc/footer.php');
 ?>

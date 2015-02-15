@@ -13,8 +13,8 @@ on this site. The ``view'' link navigates directly to that page.
 </p>
 <?
 $links = array(
-  'attack' => MALHOST."stored/attack",
-  'view' => TGTHOST."stored/view",
+  'attack' => MALROOT."stored/attack",
+  'view' => TGTROOT."stored/view",
 );
 include('../inc/footer.php');
 ?>

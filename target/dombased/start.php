@@ -13,8 +13,8 @@ without the embedding attack.
 </p>
 <?
 $links = array(
-  'attack' => MALHOST."dombased/embed",
-  'clean' => TGTHOST."dombased/target",
+  'attack' => MALROOT."dombased/embed",
+  'clean' => TGTROOT."dombased/target",
 );
 include('../inc/footer.php');
 ?>

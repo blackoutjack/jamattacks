@@ -45,9 +45,9 @@ the files exist or not.
 <div id='scans'>
 </div>
 <!--
-<img src="<?=TGTHOST?>private/secret.png" onerror="gotFile(false, 'secret.png')" onload="gotFile(true, 'secret.png')" />
-<img src="<?=TGTHOST?>private/notexist.png" onerror="gotFile(false, 'notexist.png')" onload="gotFile(true, 'notexist.png')" />
-<img src="<?=TGTHOST?>private/passwords.txt" onerror="gotFile(false, 'passwords.txt')" onload="gotFile(true, 'passwords.txt')" ></iframe>
+<img src="<?=TGTROOT?>private/secret.png" onerror="gotFile(false, 'secret.png')" onload="gotFile(true, 'secret.png')" />
+<img src="<?=TGTROOT?>private/notexist.png" onerror="gotFile(false, 'notexist.png')" onload="gotFile(true, 'notexist.png')" />
+<img src="<?=TGTROOT?>private/passwords.txt" onerror="gotFile(false, 'passwords.txt')" onload="gotFile(true, 'passwords.txt')" ></iframe>
 -->
 <br/>
 <pre id="results"></pre>
@@ -66,13 +66,13 @@ for (var i in files) {
     child.addEventListener('error', fileError);
     child.addEventListener('load', fileLoad);
   }
-  child.src = "<?=TGTHOST?>private/" + file;
+  child.src = "<?=TGTROOT?>private/" + file;
   elt.appendChild(child);
 }
 </script>
 <?
 $links = array(
-  'scanning start' => TGTHOST."scanning/start",
+  'scanning start' => TGTROOT."scanning/start",
 );
 include('../inc/footer.php');
 ?>

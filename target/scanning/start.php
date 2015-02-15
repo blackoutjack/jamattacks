@@ -16,11 +16,11 @@ include('../inc/header.php');
 <?
 if ($loggedin) {
 ?>
- <a href="<?=TGTHOST?>login?referer=scanning/start&logout=1">log out</a>
+ <a href="<?=TGTROOT?>login?referer=scanning/start&logout=1">log out</a>
 <?
 } else {
 ?>
- <a href="<?=TGTHOST?>login?referer=scanning/start">log in</a>
+ <a href="<?=TGTROOT?>login?referer=scanning/start">log in</a>
 <?
 }
 ?>
@@ -41,7 +41,7 @@ on your prior authentication to steal resources.
 </p>
 <?
 $links = array(
-  'attack' => MALHOST."scanning/scan",
+  'attack' => MALROOT."scanning/scan",
 );
 include('../inc/footer.php');
 ?>

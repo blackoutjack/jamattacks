@@ -11,7 +11,7 @@ on this website that utilizes a script from a malicious site.
 </p>
 <?
 $links = array(
-  'attack' => TGTHOST."trojan/app",
+  'attack' => TGTROOT."trojan/app",
 );
 include('../inc/footer.php');
 ?>

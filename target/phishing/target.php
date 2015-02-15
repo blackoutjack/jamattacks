@@ -4,7 +4,7 @@ include('../declare.php');
 $title = "Attack pattern prototype: Phishing";
 $logintitle = "Target website login";
 $links = array(
-  'phishing start' => TGTHOST."phishing/start",
+  'phishing start' => TGTROOT."phishing/start",
 );
 
 include(INCDIR.'loginform.php');

@@ -15,7 +15,7 @@ document.write("window.name: " + name);
 </p>
 <?
 $links = array(
-  'dom-based XSS start' => TGTHOST."dombased/start",
+  'dom-based XSS start' => TGTROOT."dombased/start",
 );
 include('../inc/footer.php');
 ?>

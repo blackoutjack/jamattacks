@@ -26,7 +26,7 @@ foreach ($values as $vals) {
 </ul>
 <?
 $links = array(
-  'stored XSS start' => TGTHOST."stored/start",
+  'stored XSS start' => TGTROOT."stored/start",
 );
 include('../inc/footer.php');
 ?>

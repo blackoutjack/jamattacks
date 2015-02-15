@@ -13,8 +13,8 @@ sans attack.
 </p>
 <?
 $links = array(
-  'attack' => MALHOST."reflected/reflect",
-  'clean' => TGTHOST."reflected/target",
+  'attack' => MALROOT."reflected/reflect",
+  'clean' => TGTROOT."reflected/target",
 );
 include('../inc/footer.php');
 ?>
