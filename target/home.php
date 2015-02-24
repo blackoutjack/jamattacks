@@ -7,9 +7,9 @@ include('inc/header.php');
 <h1>Attack pattern prototypes</h1>
 <p class="instructions">
 This page is the starting point for exploring working implementations of
-the prototypical attack architectures described in the paper ``Effective
-Protection Models for Browser-Based Policy Enforcement'' by Rich Joiner,
-Tom Reps, and Somesh Jha.
+the prototypical attack architectures described in the paper ``Protection
+Models for Security-Policy Enforcement'' by Rich Joiner, Tom Reps, and
+Somesh Jha.
 </p>
 <p class="instructions">
 You are currently visiting the target server, a benign website
