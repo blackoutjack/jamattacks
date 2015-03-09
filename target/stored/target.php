@@ -28,7 +28,7 @@ if ($value) {
 <?
 }
 ?>
-You can go here to view previously submitted values: <a href="<?=TGTROOT?>/stored/view">view</a>
+You can go here to view previously submitted values: <a href="<?=TGTROOT?>stored/view">view</a>
 </p>
 <?
 $links = array(

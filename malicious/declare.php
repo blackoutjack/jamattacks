@@ -4,6 +4,7 @@ session_start();
 
 $hostname = $_SERVER['HTTP_HOST'];
 if ($hostname === 'blackoutjack.com' || $hostname === 'www.blackoutjack.com') {
+  error_reporting(E_ALL);
   define('MALHOST', 'http://blackoutjack.com/malicious/');
   define('TGTHOST', 'https://policy-weaving.cs.wisc.edu/target/');
   define('MALROOT', MALHOST.'malicious/');
@@ -13,6 +14,7 @@ if ($hostname === 'blackoutjack.com' || $hostname === 'www.blackoutjack.com') {
 
   define('INCDIR', implode(DIRECTORY_SEPARATOR, array($_SERVER['DOCUMENT_ROOT'], 'malicious', 'inc', '')));
 } else {
+  error_reporting(0);
   define('MALHOST', 'http://malicious/');
   define('TGTHOST', 'http://target/');
   define('MALROOT', MALHOST);

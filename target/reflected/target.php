@@ -1,5 +1,6 @@
 <?php
 include('../declare.php');
+header('x-xss-protection: 0');
 
 $value = isset($_REQUEST['value']) ? $_REQUEST['value'] : '';
 
