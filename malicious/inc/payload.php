@@ -18,6 +18,99 @@ $OBFUSCATIONS = array(
   'dynamic' => 'dynamic',
 );
 
+// Before calling this function, the containing page should define the
+// |PreparePayload| and |PrepareImage| functions to encode the payloads.
+function LoadAttacks() {
+  global $OBFUSCATIONS;
+  $attacks = array();
+
+  $adesc = 'exfil_test';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $exfilsub = array('TESTNAME' => $name);
+    $attacks[$adesc][$name] = PrepareScript('exfil', $obfu, $exfilsub);
+  }
+
+  $adesc = 'exfil_clone1';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $testsuf = 'clone1_'.$name;
+    $exfilsub['TESTNAME'] = $testsuf;
+    $attacks[$adesc][$name] = PrepareScript('exfil_clone1', $obfu, $exfilsub);
+  }
+
+  $adesc = 'exfil_clone2';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $testsuf = 'clone2_'.$name;
+    $exfilsub['TESTNAME'] = $testsuf;
+    $attacks[$adesc][$name] = PrepareScript('exfil_clone2', $obfu, $exfilsub);
+  }
+
+  $adesc = 'exfil_clone3';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $testsuf = 'clone3_'.$name;
+    $exfilsub['TESTNAME'] = $testsuf;
+    $attacks[$adesc][$name] = PrepareScript('exfil_clone3', $obfu, $exfilsub);
+  }
+
+  $adesc = 'exfil_clone4';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $testsuf = 'clone4_'.$name;
+    $exfilsub['TESTNAME'] = $testsuf;
+    $attacks[$adesc][$name] = PrepareScript('exfil_clone4', $obfu, $exfilsub);
+  }
+
+  $adesc = 'exfil_clone5';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $testsuf = 'clone5_'.$name;
+    $exfilsub['TESTNAME'] = $testsuf;
+    $attacks[$adesc][$name] = PrepareScript('exfil_clone5', $obfu, $exfilsub);
+  }
+
+  $adesc = 'portscanner';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('portscanner', $obfu);
+  }
+
+  $adesc = 'redleg-array-obfuscate';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('redleg-array-obfuscate', $obfu);
+  }
+
+  $adesc = 'session-steal';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('sessionsteal', $obfu, true);
+  }
+
+  $adesc = 'metasploit-steal-form';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('metasploit-steal-form', $obfu, true);
+  }
+
+  $adesc = 'samy-mapxss';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc]['#comment'] = 'This attack targets the Verizon FiOS'.
+      ' router. Even without this setup, the initial XMLHttpRequest can'.
+      ' be observed.';
+    $attacks[$adesc][$name] = PrepareScript('samy-mapxss', $obfu, true);
+  }
+
+  $adesc = 'image-exfil';
+  $attacks[$adesc] = array();
+  $attacks[$adesc]['basic'] = PrepareImage(MALROOT.'images/attack.png');
+
+  return $attacks;
+}
+
 function GetBaseSubs() {
   static $basesubs = array(
     'MALHOST' => MALHOST,

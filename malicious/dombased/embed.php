@@ -3,7 +3,6 @@ include('../declare.php');
 include(INCDIR.'payload.php');
 
 $errors = array();
-$attacks = array();
 
 function PrepareScript($testname, $obfu, $subs) {
   if (is_array($subs)) {
@@ -27,21 +26,7 @@ function PrepareImage($src) {
   return '<img src="'.$src.'" />';
 }
 
-$adesc = 'exfil_test';
-$attacks[$adesc] = array();
-foreach ($OBFUSCATIONS as $name => $obfu) {
-  $exfilsub = array('TESTNAME' => $name);
-  $attacks[$adesc][$name] = PrepareScript('exfil', $obfu, $exfilsub);
-}
-
-$adesc = 'exfil_clone1';
-$attacks[$adesc] = array();
-foreach ($OBFUSCATIONS as $name => $obfu) {
-  $testsuf = 'clone1_'.$name;
-  $exfilsub['TESTNAME'] = $testsuf;
-  $attacks[$adesc][$name] = PrepareScript('exfil_clone1', $obfu, $exfilsub);
-}
-
+$attacks = LoadAttacks();
 
 $title = "Malicious server prototype: DOM-based XSS";
 include(INCDIR.'header.php');
@@ -97,6 +82,17 @@ function loadIframe(att, obfu) {
 ]]>
 </script>
 <h1>DOM-based XSS</h1>
+<p class="instructions">
+Clicking on the links below will initiate DOM-based XSS attacks on the
+target server via an embedding exploit.
+</p>
+<?
+if (sizeof($errors) > 0) {
+?>
+<p id="errors"><?=implode('<br/>', $errors)?></p>
+<?
+}
+?>
 <div id="embed">
 </div>
 <?

