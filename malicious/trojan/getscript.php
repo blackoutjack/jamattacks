@@ -34,8 +34,7 @@ function PrepareImage($src) {
 // Get the substitution array for a particular tests.
 $sub = null;
 if (in_array($payload, array('exfil', 'exfil_clone1', 'exfil_clone2', 'exfil_clone3', 'exfil_clone4', 'exfil_clone5'))) {
-  $sub = array('TESTNAME' => $name);
-} else if () {
+  $sub = array('TESTNAME' => $obfu);
 }
 
 $script = PrepareScript($payload, $obfu, $sub);

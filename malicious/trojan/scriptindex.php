@@ -32,7 +32,7 @@ if (sizeof($errors) > 0) {
 
 foreach ($attacks as $aname => $attack) {
 ?>
-  <attack name="<?=htmlspecialchars($aname)?>">
+  <payload name="<?=htmlspecialchars($aname)?>">
 <?
   foreach ($attack as $ob => $pl) {
     if (strpos($ob, '#') === 0) {
@@ -48,7 +48,7 @@ foreach ($attacks as $aname => $attack) {
     }
   }
 ?>
-  </attack>
+  </payload>
 <?
 }
 ?>

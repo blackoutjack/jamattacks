@@ -1,7 +1,11 @@
 <?php
 include('../declare.php');
+include(INCDIR.'contentutil.php');
 
-$title = "Attack pattern prototype: Trojan";
+$title = 'Attack pattern prototype: Trojan';
+
+$pl = isset($_REQUEST['payload']) ? $_REQUEST['payload'] : 'random';
+$obfu = isset($_REQUEST['obfu']) ? $_REQUEST['obfu'] : 'random';
 
 ob_start();
 ?>
@@ -31,7 +35,7 @@ ob_start();
 <?
 $header = ob_get_clean();
 
-include('../inc/header.php');
+include(INCDIR.'header.php');
 ?>
 <h1>Trojan</h1>
 <p class="instructions">
@@ -56,11 +60,12 @@ Simple Colorpicker
 </div><!-- End demo -->
 <!-- colorpicker end -->
 
-<script type="text/javascript" src="<?=TGTROOT."trojan/legit.js"?>"></script>
-<script type="text/javascript" src="<?=MALALTROOT."trojan/trojan.js"?>"></script>
+<script type="text/javascript" src="<?=TGTROOT?>trojan/legit.js"></script>
+<script type="text/javascript" src="<?=MALALTROOT?>trojan/getscript?payload=<?=AttrEscape(urlencode($pl))?>&obfu=<?=AttrEscape(urlencode($obfu))?>"></script>
 <?
+
 $links = array(
   'trojan start' => TGTROOT."trojan/start",
 );
-include('../inc/footer.php');
+include(INCDIR.'footer.php');
 ?>
