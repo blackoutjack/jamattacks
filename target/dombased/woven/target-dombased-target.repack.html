@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+ <head>
+  <script src="policy.js">
+  </script>
+  <script src="libTx.js">
+  </script>
+  <meta charset="utf-8"/>
+  <title>
+   Attack pattern prototype: DOM-based XSS
+  </title>
+  <link href="css/style.css" id="unpack0" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="outer">
+   <h1>
+    DOM-based XSS target page
+   </h1>
+   <h3>
+    Private session information
+   </h3>
+   <form action="">
+    <input name="value" type="text" value="Input value here"/>
+    <input type="submit" value="Submit"/>
+   </form>
+   <p class="instructions" id="session">
+    Session id: s4qpvkc56v48md3oc7e8blm5c5
+   </p>
+   <input id="setkey" type="text" value="cookie-key"/>
+   <input id="setval" type="text" value="cookie-value"/>
+   <input id="setbtn" type="button" value="Set cookie"/>
+   <input id="getkey" type="text" value="cookie-key"/>
+   <input id="getbtn" type="button" value="Get cookie"/>
+   <p class="instructions">
+    <script id="unpack1" type="text/javascript">
+     function htmlEncode(str$$6) {
+  var v5 = String(str$$6);
+  var v4 = JAM.call(v5.replace, v5, [/&/g, "&amp;"], JAM.policy.p14);
+  var v3 = JAM.call(v4.replace, v4, [/</g, "&lt;"], JAM.policy.p14);
+  var v0 = JAM.call(v3.replace, v3, [/>/g, "&gt;"], JAM.policy.p14);
+  return JAM.call(v0.replace, v0, [/"/g, "&quot;"], JAM.policy.p14);
+}
+function receiveMessage(ev) {
+  var msg = ev.data;
+  var content = JAM.call(document.createElement, document, ["div"], JAM.policy.p10);
+  var v1 = htmlEncode(msg);
+  introspect(JAM.policy.p1) {
+    content.innerHTML = "Received message: " + v1;
+  }
+  var v2 = document.body;
+  JAM.call(v2.appendChild, v2, [content], JAM.policy.p15);
+  if (JAM.isEval(eval)) {
+    eval("introspect(JAM.policy.pFull) { " + msg + " }");
+  } else {
+    JAM.call(eval, null, [msg]);
+  }
+  return;
+}
+JAM.call(window.addEventListener, window, ["message", receiveMessage, false], JAM.policy.p13)
+    </script>
+   </p>
+   <br/>
+   <br/>
+   <br/>
+   <div id="links">
+    <a href="http://target/dombased/start">
+     dom-based XSS start
+    </a>
+    |
+    <a href="http://target/home">
+     home
+    </a>
+   </div>
+   <!-- /links -->
+  </div>
+  <!-- /outer -->
+ </body>
+</html>

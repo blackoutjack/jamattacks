@@ -1,6 +1,6 @@
 
 // this is for the iframe to facebook.com
-document.domain = 'facebook.com'
+document.domain = '#TGTDOMAIN'
  
 uid = 501558012;
 app_id = 123456789012332;

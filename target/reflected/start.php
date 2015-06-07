@@ -2,7 +2,7 @@
 include('../declare.php');
 
 $title = "Attack pattern prototype: Reflected XSS";
-include('../inc/header.php');
+include(INCDIR.'header.php');
 ?>
 <h1>Reflected XSS</h1>
 <p class="instructions">
@@ -16,5 +16,5 @@ $links = array(
   'attack' => MALROOT."reflected/reflect",
   'clean' => TGTROOT."reflected/target",
 );
-include('../inc/footer.php');
+include(INCDIR.'footer.php');
 ?>

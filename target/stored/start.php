@@ -2,7 +2,7 @@
 include('../declare.php');
 
 $title = "Attack pattern prototype: Stored XSS";
-include('../inc/header.php');
+include(INCDIR.'header.php');
 ?>
 <h1>Stored XSS</h1>
 <p class="instructions">
@@ -16,5 +16,5 @@ $links = array(
   'attack' => MALROOT."stored/attack",
   'view' => TGTROOT."stored/view",
 );
-include('../inc/footer.php');
+include(INCDIR.'footer.php');
 ?>

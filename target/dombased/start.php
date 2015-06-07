@@ -2,7 +2,7 @@
 include('../declare.php');
 
 $title = "Attack pattern prototype: DOM-based XSS";
-include('../inc/header.php');
+include(INCDIR.'header.php');
 ?>
 <h1>DOM-based XSS</h1>
 <p class="instructions">
@@ -16,5 +16,5 @@ $links = array(
   'attack' => MALROOT."dombased/embed",
   'clean' => TGTROOT."dombased/target",
 );
-include('../inc/footer.php');
+include(INCDIR.'footer.php');
 ?>

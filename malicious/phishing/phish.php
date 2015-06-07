@@ -2,7 +2,7 @@
 include('../declare.php');
 
 $title = "Malicious client prototype: Phishing";
-include('../inc/header.php');
+include(INCDIR.'header.php');
 
 $errors = array();
 if (isset($_REQUEST['username'])) {
@@ -41,5 +41,5 @@ $action = MALHOST.$requesturi;
 $links = array(
   'phishing start' => TGTROOT."phishing/start",
 );
-include('../inc/footer.php');
+include(INCDIR.'footer.php');
 ?>

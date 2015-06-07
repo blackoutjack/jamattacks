@@ -32,7 +32,7 @@ function PrepareImage($src) {
 }
 
 // Get the substitution array for a particular tests.
-$sub = null;
+$sub = true;
 if (in_array($payload, array('exfil', 'exfil_clone1', 'exfil_clone2', 'exfil_clone3', 'exfil_clone4', 'exfil_clone5'))) {
   $sub = array('TESTNAME' => $obfu);
 }

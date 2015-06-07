@@ -2,7 +2,7 @@
 include('declare.php');
 
 $title = "Attack pattern prototypes: index";
-include('inc/header.php');
+include(INCDIR.'header.php');
 ?>
 <h1>Attack pattern prototypes</h1>
 <p class="instructions">

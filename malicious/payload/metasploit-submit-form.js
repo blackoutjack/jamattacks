@@ -5,7 +5,7 @@
 var formInfo = {
 
   /* CSS selector for the form you want to submit */
-  selector: 'form[action="/update_password"]',
+  selector: 'form[action=""]',
 
   /* inject values into some input fields */
   inputs: {

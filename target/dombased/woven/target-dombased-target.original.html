@@ -1,16 +1,19 @@
-<?php
-include('../declare.php');
-
-$title = "Attack pattern prototype: DOM-based XSS";
-include(INCDIR.'header.php');
-?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Attack pattern prototype: DOM-based XSS</title>
+<link rel="stylesheet" href="http://target/style.css"></link>
+</head>
+<body>
+<div id="outer">
 <h1>DOM-based XSS target page</h1>
 <h3>Private session information</h3>
 <form action="">
 <input type="text" name="value" value="Input value here"></input>
 <input type="submit" value="Submit"></input>
 </form>
-<p class="instructions" id="session">Session id: <?=session_id()?></p>
+<p class="instructions" id="session">Session id: s4qpvkc56v48md3oc7e8blm5c5</p>
 <input type="text" id="setkey" value="cookie-key"></input>
 <input type="text" id="setval" value="cookie-value"></input>
 <input type="button" id="setbtn" value="Set cookie"></input>
@@ -28,20 +31,16 @@ function receiveMessage(ev) {
   document.body.appendChild(content);
   eval(msg);
 }
-function evalName() {
-  var nm = window.name;
-  var content = document.createElement('div');
-  content.textContent = "Window name: " + htmlEncode(nm);
-  document.body.appendChild(content);
-  //eval(nm);
-}
-//window.addEventListener("message", receiveMessage, false);
-setTimeout(evalName, 3000);
+window.addEventListener("message", receiveMessage, false);
 </script>
 </p>
-<?
-$links = array(
-  'dom-based XSS start' => TGTROOT."dombased/start",
-);
-include(INCDIR.'footer.php');
-?>
+<br/>
+<br/>
+<br/>
+<div id="links">
+<a href="http://target/dombased/start">dom-based XSS start</a> |
+<a href="http://target/home">home</a>
+</div><!-- /links -->
+</div><!-- /outer -->
+</body>
+</html>

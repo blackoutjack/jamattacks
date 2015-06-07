@@ -2,18 +2,23 @@
 include('../declare.php');
 
 $loggedin = false;
+$errors = array();
 if (isset($_SESSION['user'])) {
   $loggedin = true;
-  $messages[] = "Logged in as <b>".$_SESSION['username']."</b>";
+  $errors[] = "Logged in as <b>".$_SESSION['username']."</b>";
 }
 
 $title = "Attack pattern prototype: Resource scanning"; 
-include('../inc/header.php');
+include(INCDIR.'header.php');
 ?>
 <h1>Resource scanning</h1>
 <p class="login">
-<?=implode(' | ', $messages)?>
 <?
+if (sizeof($errors) > 0) {
+?>
+<p id="error"><?=implode(' | ', $errors)?></p>
+<?
+}
 if ($loggedin) {
 ?>
  <a href="<?=TGTROOT?>login?referer=scanning/start&logout=1">log out</a>
@@ -43,5 +48,5 @@ on your prior authentication to steal resources.
 $links = array(
   'attack' => MALROOT."scanning/scan",
 );
-include('../inc/footer.php');
+include(INCDIR.'footer.php');
 ?>

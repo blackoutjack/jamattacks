@@ -2,29 +2,51 @@
 
 $OBFUSCATIONS = array(
   'basic' => NULL,
-  'base64' => 'b64',
-  'base64_eval1' => 'b64_eval1',
-  'base64_eval2' => 'b64_eval2',
-  'eval1' => 'eval1',
-  'eval2' => 'eval2',
-  'eval3' => 'eval3',
-  'concat' => 'concat',
-  'data' => 'data',
-  'data_base64' => 'data_b64',
-  'data_html' => 'data_html',
-  'data_iframe' => 'data_iframe',
-  'data_anchor' => 'data_anchor',
-  'dispatch' => 'dispatch',
-  'dynamic' => 'dynamic',
+  //'base64' => 'b64',
+  //'base64_eval1' => 'b64_eval1',
+  //'base64_eval2' => 'b64_eval2',
+  //'eval1' => 'eval1',
+  //'eval2' => 'eval2',
+  //'eval3' => 'eval3',
+  //'concat' => 'concat',
+  //'data' => 'data',
+  //'data_base64' => 'data_b64',
+  //'data_html' => 'data_html',
+  //'data_iframe' => 'data_iframe',
+  //'data_anchor' => 'data_anchor',
+  //'dispatch' => 'dispatch',
+  //'dynamic' => 'dynamic',
+);
+
+$DISABLED = array(
+  'session-steal',
+  'exfil_clone1',
+  'exfil_clone2',
+  'exfil_clone3',
+  'exfil_clone4',
+  'exfil_clone5',
+  'redleg-date-obfuscate',
+  'redleg-make-frame-ex',
+  'redleg-malicious-colors',
+  'samy-myspace',
+  'redleg-script-writer',
+  'tongji',
 );
 
 // Before calling this function, the containing page should define the
 // |PreparePayload| and |PrepareImage| functions to encode the payloads.
 function LoadAttacks() {
   global $OBFUSCATIONS;
+  global $DISABLED;
   $attacks = array();
 
-  $adesc = 'exfil_test';
+  $adesc = 'austin-html5';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('austin-html5', $obfu, true);
+  }
+
+  $adesc = 'exfil';
   $attacks[$adesc] = array();
   foreach ($OBFUSCATIONS as $name => $obfu) {
     $exfilsub = array('TESTNAME' => $name);
@@ -83,16 +105,64 @@ function LoadAttacks() {
     $attacks[$adesc][$name] = PrepareScript('redleg-array-obfuscate', $obfu);
   }
 
-  $adesc = 'session-steal';
+  $adesc = 'redleg-bacan-yaqan';
   $attacks[$adesc] = array();
   foreach ($OBFUSCATIONS as $name => $obfu) {
-    $attacks[$adesc][$name] = PrepareScript('sessionsteal', $obfu, true);
+    $attacks[$adesc][$name] = PrepareScript('redleg-bacan-yaqan', $obfu);
+  }
+
+  $adesc = 'redleg-date-obfuscate';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('redleg-date-obfuscate', $obfu);
+  }
+
+  $adesc = 'redleg-frame-writer';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('redleg-frame-writer', $obfu);
+  }
+
+  $adesc = 'redleg-make-frame-ex';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('redleg-make-frame-ex', $obfu);
+  }
+
+  $adesc = 'redleg-malicious-colors';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('redleg-malicious-colors', $obfu);
+  }
+
+  $adesc = 'redleg-script-writer';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('redleg-script-writer', $obfu);
   }
 
   $adesc = 'metasploit-steal-form';
   $attacks[$adesc] = array();
   foreach ($OBFUSCATIONS as $name => $obfu) {
     $attacks[$adesc][$name] = PrepareScript('metasploit-steal-form', $obfu, true);
+  }
+
+  $adesc = 'metasploit-steal-headers';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('metasploit-steal-headers', $obfu, true);
+  }
+
+  $adesc = 'metasploit-submit-form';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('metasploit-submit-form', $obfu, true);
+  }
+
+  $adesc = 'samy-evercookie';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('samy-evercookie', $obfu, true);
   }
 
   $adesc = 'samy-mapxss';
@@ -104,15 +174,47 @@ function LoadAttacks() {
     $attacks[$adesc][$name] = PrepareScript('samy-mapxss', $obfu, true);
   }
 
+  $adesc = 'samy-myspace';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('samy-myspace', $obfu, true);
+  }
+
+  $adesc = 'session-steal';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('sessionsteal', $obfu, true);
+  }
+
+  $adesc = 'tongji';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('tongji', $obfu, true);
+  }
+
+  $adesc = 'userprefs';
+  $attacks[$adesc] = array();
+  foreach ($OBFUSCATIONS as $name => $obfu) {
+    $attacks[$adesc][$name] = PrepareScript('userprefs', $obfu, true);
+  }
+
   $adesc = 'image-exfil';
   $attacks[$adesc] = array();
   $attacks[$adesc]['basic'] = PrepareImage(MALROOT.'images/attack.png');
+
+  foreach ($DISABLED as $disable) {
+    if (isset($attacks[$disable])) {
+      unset($attacks[$disable]);
+    }
+  }
 
   return $attacks;
 }
 
 function GetBaseSubs() {
   static $basesubs = array(
+    'MALDOMAIN' => MALDOMAIN,
+    'TGTDOMAIN' => TGTDOMAIN,
     'MALHOST' => MALHOST,
     'TGTHOST' => TGTHOST,
     'MALROOT' => MALROOT,

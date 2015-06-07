@@ -51,6 +51,9 @@ for ($i=0; $i<$pllist->length; $i++) {
 <p class="comment"><?=XMLEncode($comment)?></p>
 <?
   }
+?>
+<a href="<?=TGTROOT?>woven/trojan/<?=AttrEscape($pl)?>/<?=$pl?>.repack.html">woven</a>
+<?
   $obfus = $plnode->getElementsByTagName('obfuscation');
   for ($j=0; $j<$obfus->length; $j++) {
     $obnode = $obfus->item($j);

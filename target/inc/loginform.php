@@ -2,11 +2,8 @@
 
 $errors = array();
 
-$referer = false;
-if (isset($_REQUEST['referer'])) {
-  $referer = $_REQUEST['referer'];
-}
-$requesturi = $_SERVER['REQUEST_URI'];
+$referer = LoadParam('referer', $_REQUEST);
+$requesturi = LoadParam('REQUEST_URI', $_SERVER, '');
 if (substr($requesturi, 0, 1) === '/') {
   $requesturi = substr($requesturi, 1);
 }
@@ -14,19 +11,21 @@ $action = TGTHOST.$requesturi;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $ok = true;
-  if (isset($_POST['login'])) {
-    if (!isset($_POST['username'])) {
+  $login = LoadParam('login', $_POST);
+  if ($login !== null) {
+    $usr = LoadParam('username', $_POST);
+    if ($usr === null) {
       $errors[] = "No username provided<br/>";
       $ok = false;
     }
-    if (!isset($_POST['password'])) {
+    $pwd = LoadParam('password', $_POST);
+    if ($pwd === null) {
       $errors[] = "No password provided<br/>";
       $ok = false;
     }
     if ($ok) {
-      $usr = $_POST['username'];
-      $usrsql = mysql_real_escape_string($usr); 
-      $pwdsql = mysql_real_escape_string(sha1($_POST['password']));
+      $usrsql = SQLEscape($usr); 
+      $pwdsql = SQLEscape(sha1($pwd));
 
       $res = mysql_query("SELECT uid, admin FROM users WHERE name='$usrsql' AND password='$pwdsql'");
       $cnt = mysql_num_rows($res);
@@ -36,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $usr;
         $_SESSION['admin'] = $admin;
         
-        if ($referer !== false) {
+        if ($referer !== null) {
           header('Location: '.$referer);
           exit;
         }
@@ -49,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 $loggedin = false;
-if (isset($_REQUEST['logout'])) {
+$logout = LoadParam('logout', $_REQUEST);
+if ($logout !== null) {
   unset($_SESSION['user']);
   unset($_SESSION['username']);
   unset($_SESSION['admin']);
@@ -59,13 +59,16 @@ if (isset($_REQUEST['logout'])) {
   $errors[] = "Logged in as ".$_SESSION['username'];
 }
 
-include(INCDIR.'header.php');
 ?>
-<h1><?=isset($logintitle) ? htmlspecialchars($logintitle) : "Target Server Login"?></h1>
+<h1><?=isset($logintitle) ? XMLEncode($logintitle) : "Target Server Login"?></h1>
+<?
+if (sizeof($errors) > 0) {
+?>
 <p id="error">
 <?=implode('<br/>', $errors)?>
 </p>
 <?
+}
 if ($loggedin) {
 ?>
 <form name="logout" method="post" action="<?=$action?>">
@@ -74,7 +77,7 @@ if ($loggedin) {
 <?
 } else {
 ?>
-<form name="login" method="post" action="<?=$action?>">
+<form name="login" method="post" action="<?=AttrEscape($action)?>">
 <div class="label">
 <label for="username">Username:</label>
 </div>
@@ -86,9 +89,9 @@ if ($loggedin) {
 <input class="field" id="password" name="password" type="password"></input>
 <br/>
 <?
-if ($referer !== false) {
+if ($referer !== null) {
 ?>
-<input name="referer" type="hidden" value="<?=htmlspecialchars($referer)?>"></input>
+<input name="referer" type="hidden" value="<?=AttrEscape($referer)?>"></input>
 <?
 }
 ?>
@@ -97,5 +100,4 @@ if ($referer !== false) {
 </form>
 <?
 }
-include(INCDIR.'footer.php');
 ?>

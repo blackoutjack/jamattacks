@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Attack pattern prototype: DOM-based XSS
+  </title>
+  <link href="css/style.css" id="unpack0" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="outer">
+   <h1>
+    DOM-based XSS target page
+   </h1>
+   <h3>
+    Private session information
+   </h3>
+   <form action="">
+    <input name="value" type="text" value="Input value here"/>
+    <input type="submit" value="Submit"/>
+   </form>
+   <p class="instructions" id="session">
+    Session id: s4qpvkc56v48md3oc7e8blm5c5
+   </p>
+   <input id="setkey" type="text" value="cookie-key"/>
+   <input id="setval" type="text" value="cookie-value"/>
+   <input id="setbtn" type="button" value="Set cookie"/>
+   <input id="getkey" type="text" value="cookie-key"/>
+   <input id="getbtn" type="button" value="Get cookie"/>
+   <p class="instructions">
+    <script id="unpack1" type="text/javascript">
+    </script>
+   </p>
+   <br/>
+   <br/>
+   <br/>
+   <div id="links">
+    <a href="http://target/dombased/start">
+     dom-based XSS start
+    </a>
+    |
+    <a href="http://target/home">
+     home
+    </a>
+   </div>
+   <!-- /links -->
+  </div>
+  <!-- /outer -->
+ </body>
+</html>
